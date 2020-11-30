@@ -21,9 +21,9 @@ void RandomDataInitialization(int** Matrix, int Size) {
 				if ((tmp % 100) < InfinitiesPercent) {
 					Matrix[i][j] = INF;
 				}
-				else if (rand() % 100 < 5)
+				else if (rand() % 100 < 3)
 				{
-					Matrix[i][j] = (-1)*tmp % 1001 + 1;
+					Matrix[i][j] = (-1)*tmp % 11 + 1;
 				}
 				else
 				{
@@ -52,21 +52,11 @@ void printMatrix(int** matrix, int dim) {
 	cout << endl;
 }
 
-
-bool checkNegativeCircle(int **matrix, int numberOfVert) {
-
-	for (int i = 0; i < numberOfVert; ++i)
-	{
-		if (matrix[i][i] < 0) return true;
-	}
-	return false;
-
-}
 //matrix - матрица смежности
 //реализация алгоритма Флода-Воршелла
 int originalFloydWarshall(int **matrix, int numberOfVert) {
 	clock_t tic = clock();
-	bool with_negative_circle = false;
+	
 	//Пробегаемся по всем вершинам и ищем более короткий путь
 	//через вершину k
 	
@@ -83,8 +73,6 @@ int originalFloydWarshall(int **matrix, int numberOfVert) {
 		}
 		
 	tic = clock() - tic;
-	with_negative_circle = checkNegativeCircle(matrix, numberOfVert);
-	cout << "Граф с отрицательным(и) циклом(ами)" << endl;
 	return (tic);
 }
 
